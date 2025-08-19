@@ -1,0 +1,3900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dumila Secondary School - School Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Combined CSS with enhancements */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            background: #1abc9c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .school-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1abc9c;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .tagline {
+            font-size: 16px;
+            color: #ecf0f1;
+            margin-top: 5px;
+        }
+        
+        /* Login Section */
+        #loginSection {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        #loginSection:hover {
+            transform: translateY(-5px);
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 12px 20px;
+            cursor: pointer;
+            background: #f4f4f4;
+            border: none;
+            font-weight: bold;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .auth-tab.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .auth-form {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .form-group input, 
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+        }
+        
+        .forgot-password {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .forgot-password:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #3498db;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-primary {
+            background: #3498db;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        .btn-success {
+            background: #2ecc71;
+        }
+        
+        .btn-success:hover {
+            background: #27ae60;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+            margin-right: 1rem;
+        }
+        
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        
+        /* Dashboard Styles */
+        .dashboard {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .dashboard-header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #1abc9c;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .last-login {
+            font-size: 12px;
+            color: #bdc3c7;
+            margin-top: 3px;
+        }
+        
+        .dashboard-content {
+            padding: 25px;
+        }
+        
+        .dashboard-title {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        /* Card Styles */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #3498db;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card h3 i {
+            color: #3498db;
+        }
+        
+        .card p {
+            margin-bottom: 1.5rem;
+            color: #666;
+            flex-grow: 1;
+        }
+        
+        .card .btn {
+            align-self: flex-start;
+            margin-top: auto;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+            position: sticky;
+            top: 0;
+        }
+        
+        table tr:hover {
+            background-color: #f5f7fa;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 2rem;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s;
+            position: relative;
+        }
+        
+        @keyframes slideIn {
+            from {transform: translateY(-50px); opacity: 0;}
+            to {transform: translateY(0); opacity: 1;}
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close:hover {
+            color: #333;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+            gap: 10px;
+        }
+        
+        /* Alert Messages */
+        .alert {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .alert-error {
+            background-color: #fdecea;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .alert-success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        /* Class Management Styles */
+        .class-management {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .form-section {
+            flex: 1;
+            min-width: 200px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .streams-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .stream-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .stream-item:hover {
+            transform: translateX(5px);
+        }
+        
+        /* Timetable Styles */
+        .timetable {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        
+        .timetable th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #34495e;
+        }
+        
+        .timetable td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        
+        .timetable td:hover {
+            background-color: #f1f8e9;
+        }
+        
+        .timetable tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        /* Excel Upload Styles */
+        .file-upload {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            text-align: center;
+            background: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+        
+        .file-upload:hover {
+            border-color: #3498db;
+        }
+        
+        .file-upload input {
+            display: none;
+        }
+        
+        .file-upload label {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        
+        .file-upload label:hover {
+            background: #2980b9;
+        }
+        
+        .file-name {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Student Search Styles */
+        .search-box {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .search-box button {
+            padding: 12px 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin: 0 15px;
+            gap: 10px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: #1abc9c;
+            transform: scale(1.1);
+        }
+        
+        .social-icons a i {
+            color: white;
+            font-size: 18px;
+        }
+        
+        .copyright {
+            font-size: 14px;
+            margin-top: 10px;
+            color: #bdc3c7;
+        }
+        
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            background: #2ecc71;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(110%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification i {
+            font-size: 20px;
+        }
+        
+        /* Security Badge */
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .auth-box {
+                padding: 20px;
+            }
+            
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .user-info {
+                margin-bottom: 10px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Performance Chart */
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .chart-bar {
+            height: 30px;
+            margin: 10px 0;
+            background: #e0e0e0;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart-fill {
+            height: 100%;
+            background: #3498db;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .chart-label {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #333;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .chart-value {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #333;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        /* Attendance Stats */
+        .attendance-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .stat-card {
+            padding: 15px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            flex: 1;
+            margin: 0 10px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification System -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span>Action completed successfully!</span>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo">D</div>
+            <div>
+                <h1 class="school-name">DUMILA SECONDARY SCHOOL</h1>
+                <p class="tagline">School Management System</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Login Section -->
+        <div id="loginSection">
+            <!-- Tab System -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="showAuthForm('loginForm')">Login</button>
+                <button class="auth-tab" onclick="showAuthForm('registerForm')">Register</button>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form active">
+                <h2 style="text-align: center; margin-bottom: 1.5rem;">Login to System</h2>
+                
+                <div id="loginError" class="alert alert-error" style="display: none;"></div>
+                <div id="loginSuccess" class="alert alert-success" style="display: none;"></div>
+                
+                <div class="form-group">
+                    <label for="userRole">Role</label>
+                    <select id="userRole" class="form-control">
+                        <option value="admin">Administrator</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="parent">Parent</option>
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter your username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+                
+                <!-- Remember me and forgot password -->
+                <div class="login-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password" onclick="showForgotPassword()">Forgot password?</a>
+                </div>
+                
+                <button id="loginBtn" class="btn">Login</button>
+                
+                <!-- Student Results Search (Visible to non-logged in users) -->
+                <div id="studentResultsSearch" style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+                    <h3 style="text-align: center; margin-bottom: 1rem;">Parent/Student Results Lookup</h3>
+                    <div class="search-box">
+                        <input type="text" id="studentSearchInput" placeholder="Enter student full name">
+                        <button class="btn" onclick="searchStudentResults()">Search</button>
+                    </div>
+                    <div id="studentSearchResults" style="margin-top: 20px;"></div>
+                </div>
+            </div>
+            
+            <!-- Register Form -->
+            <div id="registerForm" class="auth-form">
+                <h2 style="text-align: center; margin-bottom: 1.5rem;">Register New Account</h2>
+                
+                <div id="registerError" class="alert alert-error" style="display: none;"></div>
+                <div id="registerSuccess" class="alert alert-success" style="display: none;"></div>
+                
+                <div class="form-group">
+                    <label for="regRole">Role</label>
+                    <select id="regRole" class="form-control">
+                        <option value="teacher">Teacher</option>
+                        <option value="parent">Parent</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="regUsername">Username</label>
+                    <input type="text" id="regUsername" placeholder="Choose a username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" placeholder="Enter password (at least 6 characters)">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Re-enter password">
+                </div>
+                
+                <button id="registerBtn" class="btn btn-success">Register</button>
+            </div>
+            
+            <!-- Forgot Password Form -->
+            <div id="forgotPasswordForm" class="auth-form" style="display: none;">
+                <h2 style="text-align: center; margin-bottom: 1.5rem;">Reset Password</h2>
+                
+                <div id="forgotError" class="alert alert-error" style="display: none;"></div>
+                <div id="forgotSuccess" class="alert alert-success" style="display: none;"></div>
+                
+                <div class="form-group">
+                    <label for="forgotUsername">Username</label>
+                    <input type="text" id="forgotUsername" placeholder="Enter your username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="forgotRole">Role</label>
+                    <select id="forgotRole" class="form-control">
+                        <option value="admin">Administrator</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="parent">Parent</option>
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+                
+                <button id="resetPasswordBtn" class="btn">Send Instructions</button>
+                <button class="btn btn-secondary" onclick="showAuthForm('loginForm')" style="margin-top: 10px;">Back to Login</button>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="adminDashboard" class="dashboard">
+            <div class="dashboard-header">
+                <div class="user-info">
+                    <div class="user-avatar" id="adminAvatar">A</div>
+                    <div>
+                        <h2 id="adminName">Administrator</h2>
+                        <p id="adminRole">System Administrator</p>
+                        <div class="last-login" id="adminLastLogin"></div>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+            
+            <div class="dashboard-content">
+                <h2 class="dashboard-title">Administrator Dashboard</h2>
+                
+                <div class="card-container">
+                    <div class="card">
+                        <h3><i class="fas fa-users"></i> Manage Users</h3>
+                        <p>Add, edit and delete user accounts</p>
+                        <button class="btn" onclick="showModal('manageUsersModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-chart-line"></i> Manage Results</h3>
+                        <p>Manage student results and generate reports</p>
+                        <button class="btn" onclick="showModal('manageResultsModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-chalkboard"></i> Manage Classes</h3>
+                        <p>Manage classes and student registration</p>
+                        <button class="btn" onclick="showModal('manageClassesModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-user-tie"></i> Teacher Assignment</h3>
+                        <p>Assign teachers to classes and subjects</p>
+                        <button class="btn" onclick="showModal('assignTeachersModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-cog"></i> System Settings</h3>
+                        <p>Change system configuration and security</p>
+                        <button class="btn" onclick="showModal('systemSettingsModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-bullhorn"></i> Announcements</h3>
+                        <p>Send announcements to all users</p>
+                        <button class="btn" onclick="showModal('announcementsModal')">Open</button>
+                    </div>
+                    
+                    <!-- New Card for Timetable Management -->
+                    <div class="card">
+                        <h3><i class="fas fa-calendar-alt"></i> Timetable</h3>
+                        <p>Manage class teaching schedules</p>
+                        <button class="btn" onclick="showModal('timetableModal')">Open</button>
+                    </div>
+                    
+                    <!-- New Card for Student Registration -->
+                    <div class="card">
+                        <h3><i class="fas fa-user-graduate"></i> Student Registration</h3>
+                        <p>Register all students in the system</p>
+                        <button class="btn" onclick="showModal('studentRegistrationModal')">Open</button>
+                    </div>
+                </div>
+                
+                <!-- Users Table -->
+                <h3 style="margin-top: 30px;">Current Users</h3>
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Username</th>
+                            <th>Last Login</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <!-- Users will be added here via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Teacher Dashboard - Enhanced with new features -->
+        <div id="teacherDashboard" class="dashboard">
+            <div class="dashboard-header">
+                <div class="user-info">
+                    <div class="user-avatar" id="teacherAvatar">T</div>
+                    <div>
+                        <h2 id="teacherName">Teacher</h2>
+                        <p id="teacherRole">Educator</p>
+                        <div class="last-login" id="teacherLastLogin"></div>
+                    </div>
+                </div>
+                <button id="teacherLogoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+            
+            <div class="dashboard-content">
+                <h2 class="dashboard-title">Teacher Dashboard</h2>
+                
+                <div class="card-container">
+                    <div class="card">
+                        <h3><i class="fas fa-upload"></i> Upload Results</h3>
+                        <p>Upload student results for each term</p>
+                        <button class="btn" onclick="showModal('uploadResultsModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-list"></i> Student List</h3>
+                        <p>View list of students in your class</p>
+                        <button class="btn" onclick="showModal('studentListModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-info-circle"></i> Class Information</h3>
+                        <p>Manage class information and subjects</p>
+                        <button class="btn" onclick="showModal('classInfoModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-chart-pie"></i> Results Summary</h3>
+                        <p>View and print class results summary</p>
+                        <button class="btn" onclick="showModal('resultsSummaryModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-user"></i> My Profile</h3>
+                        <p>Edit your personal information</p>
+                        <button class="btn" onclick="showModal('teacherProfileModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-bullhorn"></i> Announcements</h3>
+                        <p>View announcements from school administration</p>
+                        <button class="btn" onclick="showModal('teacherAnnouncementsModal')">Open</button>
+                    </div>
+                    
+                    <!-- New Card for Timetable -->
+                    <div class="card">
+                        <h3><i class="fas fa-calendar-alt"></i> Teaching Timetable</h3>
+                        <p>View your teaching schedule</p>
+                        <button class="btn" onclick="showModal('teacherTimetableModal')">Open</button>
+                    </div>
+                    
+                    <!-- New Card for Attendance Tracking -->
+                    <div class="card">
+                        <h3><i class="fas fa-clipboard-check"></i> Attendance Tracker</h3>
+                        <p>Track and manage student attendance</p>
+                        <button class="btn" onclick="showModal('attendanceModal')">Open</button>
+                    </div>
+                    
+                    <!-- New Card for Lesson Plans -->
+                    <div class="card">
+                        <h3><i class="fas fa-book-open"></i> Lesson Plans</h3>
+                        <p>Create and manage lesson plans</p>
+                        <button class="btn" onclick="showModal('lessonPlansModal')">Open</button>
+                    </div>
+                </div>
+                
+                <!-- Teacher Stats -->
+                <div class="attendance-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">32/35</div>
+                        <div class="stat-label">Students Present Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">87%</div>
+                        <div class="stat-label">Average Attendance</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Pending Assignments</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Parent Dashboard - Enhanced with new features -->
+        <div id="parentDashboard" class="dashboard">
+            <div class="dashboard-header">
+                <div class="user-info">
+                    <div class="user-avatar" id="parentAvatar">P</div>
+                    <div>
+                        <h2 id="parentName">Parent</h2>
+                        <p id="parentRole">Parent/Guardian</p>
+                        <div class="last-login" id="parentLastLogin"></div>
+                    </div>
+                </div>
+                <button id="parentLogoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+            
+            <div class="dashboard-content">
+                <h2 class="dashboard-title">Parent Dashboard</h2>
+                
+                <div class="card-container">
+                    <div class="card">
+                        <h3><i class="fas fa-chart-line"></i> Child's Performance</h3>
+                        <p>View academic progress of your child</p>
+                        <button class="btn" onclick="showModal('childPerformanceModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-file-alt"></i> Child's Reports</h3>
+                        <p>Download and view term reports</p>
+                        <button class="btn" onclick="showModal('reportCardsModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-comments"></i> Communication</h3>
+                        <p>Communicate with teachers via messaging</p>
+                        <button class="btn" onclick="showModal('communicationModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-bullhorn"></i> School Announcements</h3>
+                        <p>View important school announcements</p>
+                        <button class="btn" onclick="showModal('schoolAnnouncementsModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-user"></i> My Profile</h3>
+                        <p>Update your contact information and preferences</p>
+                        <button class="btn" onclick="showModal('parentProfileModal')">Open</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-info-circle"></i> School Information</h3>
+                        <p>Get school contact information and calendar</p>
+                        <button class="btn" onclick="showModal('schoolInfoModal')">Open</button>
+                    </div>
+                    
+                    <!-- New Card for Fee Payments -->
+                    <div class="card">
+                        <h3><i class="fas fa-money-bill-wave"></i> Fee Payments</h3>
+                        <p>View and manage school fee payments</p>
+                        <button class="btn" onclick="showModal('feePaymentsModal')">Open</button>
+                    </div>
+                    
+                    <!-- New Card for Attendance Tracking -->
+                    <div class="card">
+                        <h3><i class="fas fa-user-check"></i> Attendance</h3>
+                        <p>Track your child's attendance record</p>
+                        <button class="btn" onclick="showModal('parentAttendanceModal')">Open</button>
+                    </div>
+                </div>
+                
+                <!-- Children Overview -->
+                <div style="margin-top: 30px;">
+                    <h3>My Children</h3>
+                    <div id="childrenList" class="card-container" style="margin-top: 15px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <!-- Phone Numbers -->
+            <div class="contact-info">
+                <i class="fas fa-phone"></i>
+                <div>
+                    <div>0683 599996</div>
+                    <div>0759 453355</div>
+                </div>
+            </div>
+            
+            <!-- Address -->
+            <div class="contact-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>P.O. Box 120 Morogoro</span>
+            </div>
+            
+            <!-- Email -->
+            <div class="contact-info">
+                <i class="fas fa-envelope"></i>
+                <span>info@dumilasec.ac.tz</span>
+            </div>
+        </div>
+
+        <!-- Social Media -->
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://wa.me/255683599996" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+
+        <!-- Copyright -->
+        <div class="copyright">
+            &copy; 2025 Dumila Secondary School. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Admin Modals -->
+    <div id="manageUsersModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Manage Users</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div id="modalContent">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3>User Management</h3>
+                    <button class="btn" onclick="showAddUserForm()">Add New User</button>
+                </div>
+                
+                <div id="currentAssignments">
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Username</th>
+                                <th>Last Login</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersModalTableBody">
+                            <!-- Users will be added here via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="manageResultsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Manage Results</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Class:</label>
+                <select id="resultsFormSelect" class="form-control" onchange="updateResultsStreams()">
+                    <option value="Form 1">Form 1</option>
+                    <option value="Form 2">Form 2</option>
+                    <option value="Form 3">Form 3</option>
+                    <option value="Form 4">Form 4</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Stream:</label>
+                <select id="resultsStreamSelect" class="form-control" onchange="updateResultsView()">
+                    <!-- Streams will be added via JavaScript -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Term:</label>
+                <select id="resultsTermSelect" class="form-control" onchange="updateResultsView()">
+                    <option value="Term 1">Term 1</option>
+                    <option value="Term 2">Term 2</option>
+                    <option value="Term 3">Term 3</option>
+                </select>
+            </div>
+            
+            <div id="resultsTableView">
+                <!-- Results will be displayed here -->
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn" onclick="downloadResults()">Download Results</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="manageClassesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Manage Classes</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="class-management">
+                <div class="form-section">
+                    <h3>Available Classes</h3>
+                    <div class="streams-list">
+                        <div class="stream-item">
+                            <span>Form 1A</span>
+                            <button class="btn" onclick="manageClassStudents('Form 1', 'A')">Manage</button>
+                        </div>
+                        <div class="stream-item">
+                            <span>Form 1B</span>
+                            <button class="btn" onclick="manageClassStudents('Form 1', 'B')">Manage</button>
+                        </div>
+                        <div class="stream-item">
+                            <span>Form 2A</span>
+                            <button class="btn" onclick="manageClassStudents('Form 2', 'A')">Manage</button>
+                        </div>
+                        <div class="stream-item">
+                            <span>Form 2B</span>
+                            <button class="btn" onclick="manageClassStudents('Form 2', 'B')">Manage</button>
+                        </div>
+                        <div class="stream-item">
+                            <span>Form 3A</span>
+                            <button class="btn" onclick="manageClassStudents('Form 3', 'A')">Manage</button>
+                        </div>
+                        <div class="stream-item">
+                            <span>Form 3B</span>
+                            <button class="btn" onclick="manageClassStudents('Form 3', 'B')">Manage</button>
+                        </div>
+                        <div class="stream-item">
+                            <span>Form 4A</span>
+                            <button class="btn" onclick="manageClassStudents('Form 4', 'A')">Manage</button>
+                        </div>
+                        <div class="stream-item">
+                            <span>Form 4B</span>
+                            <button class="btn" onclick="manageClassStudents('Form 4', 'B')">Manage</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Add New Class</h3>
+                    <div class="form-group">
+                        <label>Form:</label>
+                        <select id="newClassForm" class="form-control">
+                            <option value="Form 1">Form 1</option>
+                            <option value="Form 2">Form 2</option>
+                            <option value="Form 3">Form 3</option>
+                            <option value="Form 4">Form 4</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Stream:</label>
+                        <input type="text" id="newClassStream" class="form-control" placeholder="Enter stream letter (A, B, etc.)">
+                    </div>
+                    
+                    <button class="btn" onclick="addNewClass()">Add Class</button>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="assignTeachersModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Assign Teachers</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Teacher:</label>
+                <select id="teacherSelect" class="form-control">
+                    <!-- Teachers will be added via JavaScript -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Class:</label>
+                <select id="classSelect" class="form-control">
+                    <option value="Form 1A">Form 1A</option>
+                    <option value="Form 1B">Form 1B</option>
+                    <option value="Form 2A">Form 2A</option>
+                    <option value="Form 2B">Form 2B</option>
+                    <option value="Form 3A">Form 3A</option>
+                    <option value="Form 3B">Form 3B</option>
+                    <option value="Form 4A">Form 4A</option>
+                    <option value="Form 4B">Form 4B</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Subject:</label>
+                <select id="subjectSelect" class="form-control">
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="English">English</option>
+                    <option value="Kiswahili">Kiswahili</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Biology">Biology</option>
+                    <option value="History">History</option>
+                    <option value="Geography">Geography</option>
+                </select>
+            </div>
+            
+            <button class="btn" onclick="assignTeacherToClass()">Assign Teacher</button>
+            
+            <div id="currentAssignments" style="margin-top: 30px;">
+                <!-- Current assignments will be displayed here -->
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="systemSettingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>System Settings</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>School Name:</label>
+                <input type="text" class="form-control" value="Dumila Secondary School">
+            </div>
+            
+            <div class="form-group">
+                <label>Academic Year:</label>
+                <input type="text" class="form-control" value="2025">
+            </div>
+            
+            <div class="form-group">
+                <label>Term:</label>
+                <select class="form-control">
+                    <option>Term 1</option>
+                    <option>Term 2</option>
+                    <option>Term 3</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Grading System:</label>
+                <select class="form-control">
+                    <option>Percentage (0-100%)</option>
+                    <option>Letter Grades (A-F)</option>
+                    <option>Points (0-20)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Result Publication:</label>
+                <select class="form-control">
+                    <option>Immediate</option>
+                    <option>After Approval</option>
+                    <option>Scheduled</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Security Level:</label>
+                <select class="form-control" id="securityLevel">
+                    <option value="basic">Basic</option>
+                    <option value="standard" selected>Standard</option>
+                    <option value="enhanced">Enhanced</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Password Policy:</label>
+                <select class="form-control" id="passwordPolicy">
+                    <option value="simple">Simple (6 characters minimum)</option>
+                    <option value="medium" selected>Medium (8 characters, letters and numbers)</option>
+                    <option value="strong">Strong (10 characters, with special characters)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Session Timeout (minutes):</label>
+                <input type="number" class="form-control" id="sessionTimeout" value="30" min="5" max="240">
+            </div>
+            
+            <div class="form-group">
+                <div class="remember-me">
+                    <input type="checkbox" id="enable2FA">
+                    <label for="enable2FA">Enable Two-Factor Authentication (2FA)</label>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn" onclick="saveSystemSettings()">Save Settings</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="announcementsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Send Announcements</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Announcement Title:</label>
+                <input type="text" class="form-control" placeholder="Enter announcement title">
+            </div>
+            
+            <div class="form-group">
+                <label>Target Audience:</label>
+                <select class="form-control">
+                    <option>All Users</option>
+                    <option>Teachers Only</option>
+                    <option>Parents Only</option>
+                    <option>Students Only</option>
+                    <option>Specific Class</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Message:</label>
+                <textarea class="form-control" rows="5" placeholder="Type your announcement here"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Priority:</label>
+                <select class="form-control">
+                    <option>Normal</option>
+                    <option>Important</option>
+                    <option>Urgent</option>
+                </select>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn">Send Announcement</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Student Registration Modal - Modified per requirements -->
+    <div id="studentRegistrationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Student Registration</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Class:</label>
+                <select id="studentFormSelect" class="form-control" onchange="updateStudentStreams()">
+                    <option value="Form 1">Form 1</option>
+                    <option value="Form 2">Form 2</option>
+                    <option value="Form 3">Form 3</option>
+                    <option value="Form 4">Form 4</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Stream:</label>
+                <select id="studentStreamSelect" class="form-control">
+                    <!-- Streams will be added via JavaScript -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Registration Method:</label>
+                <select id="registrationMethod" class="form-control" onchange="toggleRegistrationMethod()">
+                    <option value="single">Single Student</option>
+                    <option value="bulk">Bulk Upload (Excel)</option>
+                </select>
+            </div>
+            
+            <div id="singleStudentForm">
+                <div class="form-group">
+                    <label>Student Full Name:</label>
+                    <input type="text" id="studentName" class="form-control" placeholder="Enter student full name">
+                </div>
+                
+                <div class="form-group">
+                    <label>Parent/Guardian Name:</label>
+                    <input type="text" id="parentName" class="form-control" placeholder="Enter parent/guardian name">
+                </div>
+                
+                <div class="form-group">
+                    <label>Contact Information:</label>
+                    <input type="text" id="contactInfo" class="form-control" placeholder="Phone number or email">
+                </div>
+                
+                <button class="btn" onclick="registerSingleStudent()">Register Student</button>
+            </div>
+            
+            <div id="bulkUploadForm" style="display: none;">
+                <div class="file-upload">
+                    <input type="file" id="studentExcelFile" accept=".xlsx, .xls">
+                    <label for="studentExcelFile">Choose Excel File</label>
+                    <div class="file-name" id="excelFileName">No file chosen</div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <p>Excel file should contain columns: Full Name, Parent Name, Contact Information</p>
+                    <button class="btn" onclick="uploadStudentExcel()">Upload Students</button>
+                </div>
+            </div>
+            
+            <div id="registeredStudentsList" style="margin-top: 30px;">
+                <h4>Registered Students</h4>
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>Parent Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsTableBody">
+                        <!-- Students will be added here via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teacher Modals -->
+    <div id="uploadResultsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Upload Results</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Class:</label>
+                <select id="resultsClassSelect" class="form-control" onchange="populateResultsEntryTable()">
+                    <!-- Classes will be added via JavaScript -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Term:</label>
+                <select id="termSelect" class="form-control">
+                    <option>Term 1</option>
+                    <option>Term 2</option>
+                    <option>Term 3</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Subject:</label>
+                <select id="subjectSelect" class="form-control">
+                    <option>Mathematics</option>
+                    <option>English</option>
+                    <option>Kiswahili</option>
+                    <option>Physics</option>
+                    <option>Chemistry</option>
+                    <option>Biology</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Upload Method:</label>
+                <select id="uploadMethod" class="form-control" onchange="toggleUploadMethod()">
+                    <option value="manual">Manual Entry</option>
+                    <option value="excel">Excel Upload</option>
+                </select>
+            </div>
+            
+            <div id="manualResultsEntry">
+                <div id="resultsEntryTable">
+                    <!-- Results entry table will be added via JavaScript -->
+                </div>
+                
+                <button class="btn" onclick="submitResults()">Submit Results</button>
+            </div>
+            
+            <div id="excelResultsUpload" style="display: none;">
+                <div class="file-upload">
+                    <input type="file" id="resultsExcelFile" accept=".xlsx, .xls">
+                    <label for="resultsExcelFile">Choose Excel File</label>
+                    <div class="file-name" id="resultsFileName">No file chosen</div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <p>Excel file should contain columns: Student Name, Score</p>
+                    <button class="btn">Upload Results</button>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="studentListModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Student List</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Class:</label>
+                <select id="viewClassSelect" class="form-control" onchange="updateStudentList()">
+                    <!-- Classes will be added via JavaScript -->
+                </select>
+            </div>
+            
+            <div id="studentListTable">
+                <!-- Student list will be added via JavaScript -->
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="classInfoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Class Information</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Class:</label>
+                <select class="form-control">
+                    <!-- Classes will be added via JavaScript -->
+                </select>
+            </div>
+            
+            <div>
+                <h4>Class Details</h4>
+                <table class="user-table">
+                    <tr>
+                        <th>Class Teacher:</th>
+                        <td>Mr. Johnson</td>
+                    </tr>
+                    <tr>
+                        <th>Number of Students:</th>
+                        <td>45</td>
+                    </tr>
+                    <tr>
+                        <th>Class Prefect:</th>
+                        <td>Mary Smith</td>
+                    </tr>
+                    <tr>
+                        <th>Average Performance:</th>
+                        <td>78%</td>
+                    </tr>
+                </table>
+                
+                <h4 style="margin-top: 20px;">Subjects Offered</h4>
+                <ul>
+                    <li>Mathematics</li>
+                    <li>English</li>
+                    <li>Kiswahili</li>
+                    <li>Physics</li>
+                    <li>Chemistry</li>
+                    <li>Biology</li>
+                </ul>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="resultsSummaryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Results Summary</h2>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Class:</label>
+                <select class="form-control">
+                    <!-- Classes will be added via JavaScript -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Term:</label>
+                <select class="form-control">
+                    <option>Term 1</option>
+                    <option>Term 2</option>
+                    <option>Term 3</option>
+                </select>
+            </div>
+            
+            <div>
+                <h4>Performance Summary</h4>
+                <div class="chart-container">
+                    <div class="chart-bar">
+                        <div class="chart-fill" style="width: 85%;"></div>
+                        <span class="chart-label">Mathematics</span>
+                        <span class="chart-value">85%</span>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-fill" style="width: 78%;"></div>
+                        <span class="chart-label">English</span>
+                        <span class="chart-value">78%</span>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-fill" style="width: 82%;"></div>
+                        <span class="chart-label">Kiswahili</span>
+                        <span class="chart-value">82%</span>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-fill" style="width: 75%;"></div>
+                        <span class="chart-label">Physics</span>
+                        <span class="chart-value">75%</span>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-fill" style="width: 80%;"></div>
+                        <span class="chart-label">Chemistry</span>
+                        <span class="chart-value">80%</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>Grade</th>
+                                <th>Number of Students</th>
+                                <th>Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A (81-100%)</td>
+                                <td>12</td>
+                                <td>27%</td>
+                            </tr>
+                            <tr>
+                                <td>B (61-80%)</td>
+                                <td>20</td>
+                                <td>44%</td>
+                            </tr>
+                            <tr>
+                                <td>C (41-60%)</td>
+                                <td>10</td>
+                                <td>22%</td>
+                            </tr>
+                            <tr>
+                                <td>D (0-40%)</td>
+                                <td>3</td>
+                                <td>7%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn">Print Summary</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="teacherProfileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>My Profile</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Full Name:</label>
+                <input type="text" class="form-control" value="Teacher John">
+            </div>
+            
+            <div class="form-group">
+                <label>Email Address:</label>
+                <input type="email" class="form-control" value="teacher.john@dumilasec.ac.tz">
+            </div>
+            
+            <div class="form-group">
+                <label>Phone Number:</label>
+                <input type="tel" class="form-control" value="0756123456">
+            </div>
+            
+            <div class="form-group">
+                <label>Department:</label>
+                <input type="text" class="form-control" value="Mathematics">
+            </div>
+            
+            <div class="form-group">
+                <label>Change Password:</label>
+                <input type="password" class="form-control" placeholder="Enter new password">
+            </div>
+            
+            <div class="form-group">
+                <label>Confirm Password:</label>
+                <input type="password" class="form-control" placeholder="Confirm new password">
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn">Save Changes</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="teacherAnnouncementsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Announcements</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="announcement-list">
+                <div class="announcement-item" style="border-left: 4px solid #3498db; padding: 15px; margin-bottom: 15px; background: #f8f9fa;">
+                    <h4>Staff Meeting - 25th August</h4>
+                    <p>There will be a staff meeting on Monday 25th August at 10:00 AM in the staff room. All teachers are required to attend.</p>
+                    <p class="text-muted">Posted on: 2025-08-18 by Administration</p>
+                </div>
+                
+                <div class="announcement-item" style="border-left: 4px solid #2ecc71; padding: 15px; margin-bottom: 15px; background: #f8f9fa;">
+                    <h4>Mid-Term Exams Schedule</h4>
+                    <p>The mid-term exams schedule has been posted. Please check the notice board for details.</p>
+                    <p class="text-muted">Posted on: 2025-08-15 by Academic Office</p>
+                </div>
+                
+                <div class="announcement-item" style="border-left: 4px solid #e74c3c; padding: 15px; margin-bottom: 15px; background: #f8f9fa;">
+                    <h4>Results Submission Deadline</h4>
+                    <p>All term 1 results must be submitted by Friday 29th August. Late submissions will not be accepted.</p>
+                    <p class="text-muted">Posted on: 2025-08-10 by Academic Office</p>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Attendance Modal for Teachers -->
+    <div id="attendanceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Attendance Tracker</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Class:</label>
+                <select id="attendanceClassSelect" class="form-control">
+                    <!-- Classes will be added here via JavaScript -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Date:</label>
+                <input type="date" id="attendanceDate" class="form-control" value="2025-08-19">
+            </div>
+            
+            <div id="attendanceTable" style="margin-top: 20px;">
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mary Smith</td>
+                            <td>
+                                <select class="form-control">
+                                    <option>Present</option>
+                                    <option>Absent</option>
+                                    <option>Late</option>
+                                    <option>Excused</option>
+                                </select>
+                            </td>
+                            <td><input type="text" class="form-control" placeholder="Notes"></td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>
+                                <select class="form-control">
+                                    <option>Present</option>
+                                    <option>Absent</option>
+                                    <option>Late</option>
+                                    <option>Excused</option>
+                                </select>
+                            </td>
+                            <td><input type="text" class="form-control" placeholder="Notes"></td>
+                        </tr>
+                        <!-- More rows would be added dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <button class="btn" style="margin-top: 20px;">Save Attendance</button>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Parent Modals -->
+    <div id="childPerformanceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Child Performance</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Child:</label>
+                <select id="childSelect" class="form-control" onchange="updateChildPerformance()">
+                    <!-- Children will be added via JavaScript -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Term:</label>
+                <select id="performanceTermSelect" class="form-control" onchange="updateChildPerformance()">
+                    <option>Term 1</option>
+                    <option>Term 2</option>
+                    <option>Term 3</option>
+                </select>
+            </div>
+            
+            <div id="performanceResults">
+                <!-- Performance results will be added via JavaScript -->
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="reportCardsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Report Cards</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Child:</label>
+                <select id="reportChildSelect" class="form-control" onchange="updateReportCards()">
+                    <!-- Children will be added via JavaScript -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Term:</label>
+                <select id="reportTermSelect" class="form-control" onchange="updateReportCards()">
+                    <option>Term 1</option>
+                    <option>Term 2</option>
+                    <option>Term 3</option>
+                </select>
+            </div>
+            
+            <div id="reportCardView">
+                <!-- Report card will be added via JavaScript -->
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn" onclick="downloadReportCard()">Download Report</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="communicationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Communication</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Teacher:</label>
+                <select class="form-control">
+                    <option>Mr. Johnson (Mathematics)</option>
+                    <option>Ms. Anderson (English)</option>
+                    <option>Mr. Wilson (Physics)</option>
+                    <option>Ms. Davis (Chemistry)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Subject:</label>
+                <input type="text" class="form-control" placeholder="Message subject">
+            </div>
+            
+            <div class="form-group">
+                <label>Message:</label>
+                <textarea class="form-control" rows="5" placeholder="Type your message here"></textarea>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn">Send Message</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="schoolAnnouncementsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>School Announcements</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="announcement-list">
+                <div class="announcement-item" style="border-left: 4px solid #3498db; padding: 15px; margin-bottom: 15px; background: #f8f9fa;">
+                    <h4>Parents Meeting - 30th August</h4>
+                    <p>There will be a parents meeting on Saturday 30th August at 10:00 AM in the school hall. All parents are encouraged to attend.</p>
+                    <p class="text-muted">Posted on: 2025-08-20 by Administration</p>
+                </div>
+                
+                <div class="announcement-item" style="border-left: 4px solid #2ecc71; padding: 15px; margin-bottom: 15px; background: #f8f9fa;">
+                    <h4>School Trip Announcement</h4>
+                    <p>There will be an educational trip to the National Museum on 5th September. Permission forms must be returned by 2nd September.</p>
+                    <p class="text-muted">Posted on: 2025-08-18 by Academic Office</p>
+                </div>
+                
+                <div class="announcement-item" style="border-left: 4px solid #e74c3c; padding: 15px; margin-bottom: 15px; background: #f8f9fa;">
+                    <h4>Fee Payment Reminder</h4>
+                    <p>This is a reminder that the second installment of school fees is due by 31st August. Please ensure timely payment.</p>
+                    <p class="text-muted">Posted on: 2025-08-15 by Accounts Office</p>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="parentProfileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>My Profile</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Full Name:</label>
+                <input type="text" class="form-control" value="Parent Jane">
+            </div>
+            
+            <div class="form-group">
+                <label>Email Address:</label>
+                <input type="email" class="form-control" value="parent.jane@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label>Phone Number:</label>
+                <input type="tel" class="form-control" value="0756987654">
+            </div>
+            
+            <div class="form-group">
+                <label>Address:</label>
+                <textarea class="form-control" rows="3">123 Main Street, Morogoro</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Change Password:</label>
+                <input type="password" class="form-control" placeholder="Enter new password">
+            </div>
+            
+            <div class="form-group">
+                <label>Confirm Password:</label>
+                <input type="password" class="form-control" placeholder="Confirm new password">
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn">Save Changes</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="schoolInfoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>School Information</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div>
+                <h4>Contact Information</h4>
+                <table class="user-table">
+                    <tr>
+                        <th>School Name:</th>
+                        <td>Dumila Secondary School</td>
+                    </tr>
+                    <tr>
+                        <th>Address:</th>
+                        <td>P.O. Box 120, Morogoro</td>
+                    </tr>
+                    <tr>
+                        <th>Phone:</th>
+                        <td>0683 599996, 0759 453355</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>info@dumilasec.ac.tz</td>
+                    </tr>
+                    <tr>
+                        <th>Website:</th>
+                        <td>www.dumilasec.ac.tz</td>
+                    </tr>
+                </table>
+                
+                <h4 style="margin-top: 20px;">School Calendar</h4>
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Term 1 Begins</td>
+                            <td>10th January 2025</td>
+                        </tr>
+                        <tr>
+                            <td>Mid-Term Break</td>
+                            <td>15th - 18th March 2025</td>
+                        </tr>
+                        <tr>
+                            <td>Term 1 Ends</td>
+                            <td>5th April 2025</td>
+                        </tr>
+                        <tr>
+                            <td>Term 2 Begins</td>
+                            <td>3rd May 2025</td>
+                        </tr>
+                        <tr>
+                            <td>Term 2 Ends</td>
+                            <td>9th August 2025</td>
+                        </tr>
+                        <tr>
+                            <td>Term 3 Begins</td>
+                            <td>6th September 2025</td>
+                        </tr>
+                        <tr>
+                            <td>National Exams</td>
+                            <td>3rd - 15th November 2025</td>
+                        </tr>
+                        <tr>
+                            <td>Term 3 Ends</td>
+                            <td>20th December 2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Fee Payments Modal for Parents -->
+    <div id="feePaymentsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Fee Payments</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Child:</label>
+                <select id="feeChildSelect" class="form-control">
+                    <!-- Children will be added here via JavaScript -->
+                </select>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <h4>Fee Summary</h4>
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tuition Fee - Term 1</td>
+                            <td>TZS 150,000</td>
+                            <td>2025-02-15</td>
+                            <td>Paid</td>
+                        </tr>
+                        <tr>
+                            <td>Tuition Fee - Term 2</td>
+                            <td>TZS 150,000</td>
+                            <td>2025-06-10</td>
+                            <td>Paid</td>
+                        </tr>
+                        <tr>
+                            <td>Tuition Fee - Term 3</td>
+                            <td>TZS 150,000</td>
+                            <td>2025-10-05</td>
+                            <td>Pending</td>
+                        </tr>
+                        <tr>
+                            <td>Activity Fee</td>
+                            <td>TZS 30,000</td>
+                            <td>2025-09-01</td>
+                            <td>Pending</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <button class="btn">Make Payment</button>
+                <button class="btn btn-secondary">Download Statement</button>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // System Data
+        const schoolData = {
+            currentUser: null,
+            users: [
+                { id: 1, name: "Administrator", role: "admin", username: "admin", password: "admin123", avatar: "A" },
+                { id: 2, name: "Teacher John", role: "teacher", username: "teacher1", password: "teacher123", avatar: "J", classes: ["Form 1A", "Form 2B"], subjects: ["Mathematics"] },
+                { id: 3, name: "Parent Jane", role: "parent", username: "parent1", password: "parent123", avatar: "J", children: ["Mary Smith", "John Smith"] },
+                { id: 4, name: "Student Mary", role: "student", username: "mary123", password: "student123", avatar: "M", form: "Form 1", stream: "A", parent: "parent1" }
+            ],
+            classes: {
+                "Form 1": ["A", "B", "C"],
+                "Form 2": ["A", "B", "C"],
+                "Form 3": ["A", "B"],
+                "Form 4": ["A", "B"]
+            },
+            subjects: [
+                "Mathematics",
+                "English language",
+                "Kiswahili",
+                "Physics",
+                "Chemistry",
+                "Biology",
+                "History",
+                "Geography",
+                "Civics",
+                "Book Keeping",
+                "Commerce",
+                "Literature In English"
+            ],
+            students: [
+                { id: 1, name: "Mary Smith", form: "Form 1", stream: "A", parent: "parent1", parentName: "Parent Jane", contactInfo: "0756123456" },
+                { id: 2, name: "John Doe", form: "Form 2", stream: "B", parent: "parent2", parentName: "Parent John", contactInfo: "0756987654" }
+            ],
+            results: {
+                "Form 1A": {
+                    "Term 1": [
+                        { 
+                            student: "Mary Smith", 
+                            "Mathematics": 85, 
+                            "English language": 78, 
+                            "Kiswahili": 75,
+                            "Physics": 82,
+                            "Chemistry": 80,
+                            "Biology": 88,
+                            "History": 76,
+                            "Geography": 84,
+                            "Civics": 79,
+                            "Book Keeping": 81,
+                            "Commerce": 83,
+                            "Literature In English": 77
+                        }
+                    ]
+                }
+            },
+            timetables: {
+                "Form 1A": {
+                    "Monday": {
+                        "07:30 - 08:15": "Mathematics",
+                        "08:15 - 09:00": "English",
+                        "09:00 - 09:45": "Kiswahili",
+                        "10:00 - 10:45": "Physics",
+                        "10:45 - 11:30": "Chemistry",
+                        "11:30 - 12:15": "Biology",
+                        "12:15 - 13:00": "History"
+                    }
+                }
+            },
+            systemSettings: {
+                securityLevel: "standard",
+                passwordPolicy: "medium",
+                sessionTimeout: 30,
+                enable2FA: false
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if user is already logged in (from localStorage)
+            const storedUser = localStorage.getItem('currentUser');
+            if (storedUser) {
+                schoolData.currentUser = JSON.parse(storedUser);
+                showDashboard(schoolData.currentUser.role);
+                showLastLoginTime();
+                
+                // Check if "Remember Me" was checked
+                const remember = localStorage.getItem('rememberMe') === 'true';
+                if (remember) {
+                    document.getElementById('rememberMe').checked = true;
+                    // Pre-fill username if available
+                    document.getElementById('username').value = schoolData.currentUser.username || '';
+                }
+            }
+            
+            // Populate users table for admin
+            populateUsersTable();
+            
+            // Initialize student streams dropdown
+            updateStudentStreams();
+            
+            // Initialize file upload events
+            setupFileUploads();
+            
+            // Populate children list for parent dashboard
+            populateChildrenList();
+            
+            // Load system settings
+            loadSystemSettings();
+        });
+
+        // Function to show auth form
+        function showAuthForm(formId) {
+            // Update tabs
+            document.querySelectorAll('.auth-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Set active tab (only for login and register)
+            if (formId === 'loginForm' || formId === 'registerForm') {
+                event.target.classList.add('active');
+            }
+            
+            // Update forms
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.style.display = 'none';
+            });
+            document.getElementById(formId).style.display = 'block';
+            
+            // Clear messages
+            clearMessages();
+        }
+
+        // Function to show forgot password form
+        function showForgotPassword() {
+            // Hide all forms first
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.style.display = 'none';
+            });
+            
+            // Show forgot password form
+            document.getElementById('forgotPasswordForm').style.display = 'block';
+            
+            // Update tabs (remove active from all)
+            document.querySelectorAll('.auth-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Clear messages
+            document.getElementById('forgotError').style.display = 'none';
+            document.getElementById('forgotSuccess').style.display = 'none';
+        }
+
+        // Function to handle password reset
+        function handlePasswordReset() {
+            const username = document.getElementById('forgotUsername').value.trim();
+            const role = document.getElementById('forgotRole').value;
+            
+            // Clear previous messages
+            document.getElementById('forgotError').style.display = 'none';
+            document.getElementById('forgotSuccess').style.display = 'none';
+            
+            // Validation
+            if (!username) {
+                showError(document.getElementById('forgotError'), 'Please enter your username');
+                return;
+            }
+            
+            // Find user
+            const user = schoolData.users.find(u => u.username === username && u.role === role);
+            
+            if (user) {
+                // In a real system, you would send a password reset email
+                // For this demo, we'll just show a success message
+                showSuccess(document.getElementById('forgotSuccess'), 'Password reset instructions have been sent to your email (simulated)');
+                document.getElementById('forgotUsername').value = '';
+                showNotification('Password reset instructions sent successfully');
+            } else {
+                showError(document.getElementById('forgotError'), 'No account found with this username and role');
+            }
+        }
+
+        // Function to format date/time
+        function formatDateTime(date) {
+            if (!date) return 'First login';
+            
+            const options = { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            return 'Last login: ' + new Date(date).toLocaleDateString('en-US', options);
+        }
+
+        // Function to show last login time
+        function showLastLoginTime() {
+            if (!schoolData.currentUser) return;
+            
+            const now = new Date();
+            schoolData.currentUser.lastLogin = now;
+            
+            // Update the display based on user role
+            switch(schoolData.currentUser.role) {
+                case 'admin':
+                    document.getElementById('adminLastLogin').textContent = formatDateTime(schoolData.currentUser.lastLogin);
+                    break;
+                case 'teacher':
+                    document.getElementById('teacherLastLogin').textContent = formatDateTime(schoolData.currentUser.lastLogin);
+                    break;
+                case 'parent':
+                    document.getElementById('parentLastLogin').textContent = formatDateTime(schoolData.currentUser.lastLogin);
+                    break;
+                case 'student':
+                    // Add student dashboard if needed
+                    break;
+            }
+            
+            // Update the user in the users array
+            const userIndex = schoolData.users.findIndex(u => u.id === schoolData.currentUser.id);
+            if (userIndex !== -1) {
+                schoolData.users[userIndex].lastLogin = schoolData.currentUser.lastLogin;
+            }
+        }
+
+        // Show notification function
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.querySelector('span').textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Login Function
+        function login() {
+            const role = document.getElementById("userRole").value;
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const remember = document.getElementById('rememberMe').checked;
+            
+            // Clear previous messages
+            document.getElementById("loginError").style.display = "none";
+            document.getElementById("loginSuccess").style.display = "none";
+            
+            // Validation
+            if (!username || !password) {
+                showError(document.getElementById("loginError"), "Please enter username and password");
+                return;
+            }
+            
+            // Check credentials
+            const user = schoolData.users.find(u => 
+                u.username === username && 
+                u.password === password && 
+                u.role === role
+            );
+            
+            if (user) {
+                schoolData.currentUser = user;
+                
+                // Store user in localStorage
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                
+                // Store remember me preference
+                localStorage.setItem('rememberMe', remember);
+                
+                showSuccess(document.getElementById("loginSuccess"), "Logged in successfully! Redirecting...");
+                showNotification("Login successful");
+                
+                // Hide auth box and show dashboard after short delay
+                setTimeout(() => {
+                    document.getElementById("loginSection").style.display = "none";
+                    showDashboard(role);
+                    showLastLoginTime();
+                    
+                    // Populate children list for parent dashboard
+                    if (role === 'parent') {
+                        populateChildrenList();
+                    }
+                }, 1000);
+            } else {
+                showError(document.getElementById("loginError"), "Invalid username or password");
+            }
+        }
+
+        // Register Function
+        function register() {
+            const role = document.getElementById("regRole").value;
+            const fullName = document.getElementById("fullName").value.trim();
+            const username = document.getElementById("regUsername").value.trim();
+            const password = document.getElementById("regPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            
+            // Clear previous messages
+            document.getElementById("registerError").style.display = "none";
+            document.getElementById("registerSuccess").style.display = "none";
+            
+            // Validation
+            if (!fullName || !username || !password || !confirmPassword) {
+                showError(document.getElementById("registerError"), "Please fill all fields");
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError(document.getElementById("registerError"), "Password must be at least 6 characters");
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showError(document.getElementById("registerError"), "Passwords don't match");
+                return;
+            }
+            
+            // Check if username exists
+            if (schoolData.users.some(u => u.username === username)) {
+                showError(document.getElementById("registerError"), "This username already exists");
+                return;
+            }
+            
+            // Create new user
+            const newUser = {
+                id: schoolData.users.length + 1,
+                role,
+                name: fullName,
+                username,
+                password,
+                lastLogin: null,
+                avatar: fullName.charAt(0).toUpperCase()
+            };
+            
+            // Add default properties based on role
+            if (role === 'parent') {
+                newUser.children = [];
+            } else if (role === 'teacher') {
+                newUser.classes = [];
+                newUser.subjects = [];
+            }
+            
+            // Add to users array
+            schoolData.users.push(newUser);
+            showSuccess(document.getElementById("registerSuccess"), "Registration complete! You can now login.");
+            showNotification("Registration successful");
+            
+            // Clear form
+            document.getElementById("fullName").value = '';
+            document.getElementById("regUsername").value = '';
+            document.getElementById("regPassword").value = '';
+            document.getElementById("confirmPassword").value = '';
+            
+            // Update tables
+            populateUsersTable();
+            
+            // Switch to login form
+            showAuthForm('loginForm');
+        }
+
+        function showDashboard(role) {
+            // Hide all dashboards first
+            document.getElementById("adminDashboard").style.display = "none";
+            document.getElementById("teacherDashboard").style.display = "none";
+            document.getElementById("parentDashboard").style.display = "none";
+            
+            // Show appropriate dashboard
+            switch(role) {
+                case 'admin':
+                    document.getElementById("adminName").textContent = schoolData.currentUser.name;
+                    document.getElementById("adminAvatar").textContent = schoolData.currentUser.avatar;
+                    document.getElementById("adminDashboard").style.display = "block";
+                    break;
+                case 'teacher':
+                    document.getElementById("teacherName").textContent = schoolData.currentUser.name;
+                    document.getElementById("teacherAvatar").textContent = schoolData.currentUser.avatar;
+                    document.getElementById("teacherDashboard").style.display = "block";
+                    break;
+                case 'parent':
+                    document.getElementById("parentName").textContent = schoolData.currentUser.name;
+                    document.getElementById("parentAvatar").textContent = schoolData.currentUser.avatar;
+                    document.getElementById("parentDashboard").style.display = "block";
+                    break;
+                case 'student':
+                    // For now redirect to parent dashboard
+                    document.getElementById("parentName").textContent = schoolData.currentUser.name;
+                    document.getElementById("parentAvatar").textContent = schoolData.currentUser.avatar;
+                    document.getElementById("parentDashboard").style.display = "block";
+                    break;
+            }
+        }
+
+        // Logout Function
+        function logout() {
+            schoolData.currentUser = null;
+            localStorage.removeItem('currentUser');
+            
+            // Hide all dashboards and show auth box
+            document.getElementById("adminDashboard").style.display = "none";
+            document.getElementById("teacherDashboard").style.display = "none";
+            document.getElementById("parentDashboard").style.display = "none";
+            document.getElementById("loginSection").style.display = "block";
+            
+            // Clear form fields (except username if remember me is checked)
+            if (!document.getElementById('rememberMe').checked) {
+                document.getElementById("username").value = "";
+            }
+            document.getElementById("password").value = "";
+            clearMessages();
+            
+            // Show login form by default
+            showAuthForm('loginForm');
+            showNotification("Logout successful");
+        }
+
+        // Function to Populate Users Table
+        function populateUsersTable() {
+            const tbody = document.getElementById("usersTableBody");
+            tbody.innerHTML = "";
+            
+            schoolData.users.forEach(user => {
+                const row = document.createElement("tr");
+                
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.role}</td>
+                    <td>${user.username}</td>
+                    <td>${formatDateTime(user.lastLogin)}</td>
+                    <td>
+                        <button class="btn" onclick="editUser(${user.id})">Edit</button>
+                        ${user.role !== 'admin' ? `<button class="btn btn-danger" onclick="deleteUser(${user.id})">Delete</button>` : ''}
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        // Function to Show Add User Form
+        function showAddUserForm() {
+            const modalContent = `
+                <div class="modal-header">
+                    <h2>Add New User</h2>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input type="text" id="newUserName" class="form-control" placeholder="Enter full name">
+                </div>
+                
+                <div class="form-group">
+                    <label>Role:</label>
+                    <select id="newUserRole" class="form-control">
+                        <option value="admin">Admin</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="parent">Parent</option>
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input type="text" id="newUserUsername" class="form-control" placeholder="Enter username">
+                </div>
+                
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" id="newUserPassword" class="form-control" placeholder="Enter password">
+                </div>
+                
+                <div class="form-group">
+                    <label>Confirm Password:</label>
+                    <input type="password" id="newUserConfirmPassword" class="form-control" placeholder="Re-enter password">
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="showModal('manageUsersModal')">Back</button>
+                    <button class="btn" onclick="addNewUser()">Save</button>
+                </div>
+            `;
+            
+            // Change modal content
+            const modal = document.getElementById("manageUsersModal");
+            modal.querySelector(".modal-content").innerHTML = modalContent;
+        }
+
+        // Function to Add New User
+        function addNewUser() {
+            const name = document.getElementById("newUserName").value.trim();
+            const username = document.getElementById("newUserUsername").value.trim();
+            const role = document.getElementById("newUserRole").value;
+            const password = document.getElementById("newUserPassword").value;
+            const confirmPassword = document.getElementById("newUserConfirmPassword").value;
+            
+            // Validation
+            if (!name || !username || !password || !confirmPassword) {
+                alert("Please fill all fields!");
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters!");
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert("Passwords don't match!");
+                return;
+            }
+            
+            // Check if username exists
+            if (schoolData.users.some(u => u.username === username)) {
+                alert("This username already exists!");
+                return;
+            }
+            
+            // Create new user
+            const newUser = {
+                id: schoolData.users.length + 1,
+                name,
+                role,
+                username,
+                password,
+                avatar: name.charAt(0).toUpperCase(),
+                lastLogin: null
+            };
+            
+            // Add default properties based on role
+            if (role === 'parent') {
+                newUser.children = [];
+            } else if (role === 'teacher') {
+                newUser.classes = [];
+                newUser.subjects = [];
+            } else if (role === 'student') {
+                // Student-specific properties can be added here
+            }
+            
+            // Add to users array
+            schoolData.users.push(newUser);
+            
+            // Update tables
+            populateUsersTable();
+            
+            // Close modal
+            showModal("manageUsersModal");
+            
+            showNotification("User added successfully");
+        }
+
+        // Function to Delete User
+        function deleteUser(userId) {
+            if (schoolData.currentUser && schoolData.currentUser.id === userId) {
+                alert("You cannot delete your own account while logged in");
+                return;
+            }
+            
+            if (confirm("Are you sure you want to delete this user?")) {
+                schoolData.users = schoolData.users.filter(user => user.id !== userId);
+                populateUsersTable();
+                showNotification("User deleted successfully");
+            }
+        }
+
+        // Function to Edit User
+        function editUser(userId) {
+            const user = schoolData.users.find(u => u.id === userId);
+            if (!user) return;
+            
+            const modalContent = `
+                <div class="modal-header">
+                    <h2>Edit User</h2>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input type="text" id="editUserName" class="form-control" value="${user.name}">
+                </div>
+                
+                <div class="form-group">
+                    <label>Role:</label>
+                    <select id="editUserRole" class="form-control">
+                        <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Admin</option>
+                        <option value="teacher" ${user.role === 'teacher' ? 'selected' : ''}>Teacher</option>
+                        <option value="parent" ${user.role === 'parent' ? 'selected' : ''}>Parent</option>
+                        <option value="student" ${user.role === 'student' ? 'selected' : ''}>Student</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input type="text" id="editUserUsername" class="form-control" value="${user.username}">
+                </div>
+                
+                <div class="form-group">
+                    <label>Password (leave blank if not changing):</label>
+                    <input type="password" id="editUserPassword" class="form-control" placeholder="Enter new password">
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="showModal('manageUsersModal')">Back</button>
+                    <button class="btn" onclick="saveUserChanges(${user.id})">Save Changes</button>
+                </div>
+            `;
+            
+            // Change modal content
+            const modal = document.getElementById("manageUsersModal");
+            modal.querySelector(".modal-content").innerHTML = modalContent;
+        }
+
+        // Function to Save User Changes
+        function saveUserChanges(userId) {
+            const userIndex = schoolData.users.findIndex(u => u.id === userId);
+            if (userIndex === -1) return;
+            
+            const name = document.getElementById("editUserName").value.trim();
+            const role = document.getElementById("editUserRole").value;
+            const username = document.getElementById("editUserUsername").value.trim();
+            const password = document.getElementById("editUserPassword").value.trim();
+            
+            // Validation
+            if (!name || !username) {
+                alert('Please fill all required fields');
+                return;
+            }
+            
+            // Check if username is already taken by another user
+            if (schoolData.users.some(u => u.username === username && u.id !== userId)) {
+                alert('This username is already used by another user');
+                return;
+            }
+            
+            // Update user
+            schoolData.users[userIndex].name = name;
+            schoolData.users[userIndex].username = username;
+            schoolData.users[userIndex].role = role;
+            
+            // Update password if provided
+            if (password) {
+                schoolData.users[userIndex].password = password;
+            }
+            
+            // Update current user if editing self
+            if (schoolData.currentUser && schoolData.currentUser.id === userId) {
+                schoolData.currentUser = schoolData.users[userIndex];
+                localStorage.setItem('currentUser', JSON.stringify(schoolData.currentUser));
+                document.getElementById("adminName").textContent = schoolData.currentUser.name;
+            }
+            
+            // Update table
+            populateUsersTable();
+            
+            // Close modal
+            showModal("manageUsersModal");
+            
+            showNotification('Changes saved successfully');
+        }
+
+        // Function to Update Results Stream List
+        function updateResultsStreams() {
+            const form = document.getElementById("resultsFormSelect").value;
+            const streamSelect = document.getElementById("resultsStreamSelect");
+            
+            streamSelect.innerHTML = "";
+            schoolData.classes[form].forEach(stream => {
+                streamSelect.innerHTML += `<option value="${stream}">${stream}</option>`;
+            });
+            
+            updateResultsView();
+        }
+
+        // Function to Show Results
+        function updateResultsView() {
+            const form = document.getElementById("resultsFormSelect").value;
+            const stream = document.getElementById("resultsStreamSelect").value;
+            const term = document.getElementById("resultsTermSelect").value;
+            const className = form + stream;
+            
+            const resultsView = document.getElementById("resultsTableView");
+            
+            if (schoolData.results[className] && schoolData.results[className][term]) {
+                const results = schoolData.results[className][term];
+                
+                let html = `
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                ${schoolData.subjects.map(subject => `<th>${subject}</th>`).join('')}
+                                <th>Total</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                
+                results.forEach(result => {
+                    const total = schoolData.subjects.reduce((sum, subject) => sum + (result[subject] || 0), 0);
+                    const average = total / schoolData.subjects.length;
+                    let grade = "";
+                    
+                    if (average >= 80) grade = "A";
+                    else if (average >= 70) grade = "B";
+                    else if (average >= 60) grade = "C";
+                    else if (average >= 50) grade = "D";
+                    else grade = "F";
+                    
+                    html += `
+                        <tr>
+                            <td>${result.student}</td>
+                            ${schoolData.subjects.map(subject => `<td>${result[subject] || '-'}</td>`).join('')}
+                            <td>${total}</td>
+                            <td>${grade}</td>
+                        </tr>
+                    `;
+                });
+                
+                html += `</tbody></table>`;
+                resultsView.innerHTML = html;
+            } else {
+                resultsView.innerHTML = `<p>No results found for ${className}, ${term}</p>`;
+            }
+        }
+
+        // Function to Download Results
+        function downloadResults() {
+            showNotification("Results downloaded successfully");
+        }
+
+        // Function to Show Modal
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            
+            // If it's the manage users modal, populate users table
+            if (modalId === "manageUsersModal") {
+                populateUsersTable();
+            }
+            
+            // If it's the results modal, populate stream and results
+            if (modalId === "manageResultsModal") {
+                updateResultsStreams();
+            }
+            
+            // If it's the assign teachers modal, populate teachers list
+            if (modalId === "assignTeachersModal") {
+                const teacherSelect = document.getElementById("teacherSelect");
+                teacherSelect.innerHTML = "";
+                
+                schoolData.users
+                    .filter(user => user.role === "teacher")
+                    .forEach(teacher => {
+                        teacherSelect.innerHTML += `<option value="${teacher.id}">${teacher.name}</option>`;
+                    });
+                
+                showCurrentAssignments();
+            }
+            
+            // If it's the upload results modal, populate classes list
+            if (modalId === "uploadResultsModal" && schoolData.currentUser && schoolData.currentUser.classes) {
+                const classSelect = document.getElementById("resultsClassSelect");
+                classSelect.innerHTML = "";
+                
+                schoolData.currentUser.classes.forEach(className => {
+                    classSelect.innerHTML += `<option value="${className}">${className}</option>`;
+                });
+                
+                populateResultsEntryTable();
+            }
+            
+            // If it's the student list modal, populate classes list
+            if (modalId === "studentListModal" && schoolData.currentUser && schoolData.currentUser.classes) {
+                const classSelect = document.getElementById("viewClassSelect");
+                classSelect.innerHTML = "";
+                
+                schoolData.currentUser.classes.forEach(className => {
+                    classSelect.innerHTML += `<option value="${className}">${className}</option>`;
+                });
+                
+                updateStudentList();
+            }
+            
+            // If it's the child performance modal, populate children list
+            if (modalId === "childPerformanceModal" && schoolData.currentUser && schoolData.currentUser.children) {
+                const childSelect = document.getElementById("childSelect");
+                childSelect.innerHTML = "";
+                
+                schoolData.currentUser.children.forEach(child => {
+                    childSelect.innerHTML += `<option value="${child}">${child}</option>`;
+                });
+                
+                updateChildPerformance();
+            }
+            
+            // If it's the report cards modal, populate children list
+            if (modalId === "reportCardsModal" && schoolData.currentUser && schoolData.currentUser.children) {
+                const childSelect = document.getElementById("reportChildSelect");
+                childSelect.innerHTML = "";
+                
+                schoolData.currentUser.children.forEach(child => {
+                    childSelect.innerHTML += `<option value="${child}">${child}</option>`;
+                });
+                
+                updateReportCards();
+            }
+            
+            // If it's the student registration modal
+            if (modalId === "studentRegistrationModal") {
+                updateStudentStreams();
+                populateStudentsTable();
+            }
+            
+            // If it's the system settings modal
+            if (modalId === "systemSettingsModal") {
+                loadSystemSettings();
+            }
+        }
+
+        // Function to Close Modal
+        function closeModal() {
+            const modals = document.querySelectorAll(".modal");
+            modals.forEach(modal => {
+                modal.style.display = "none";
+            });
+        }
+
+        // Function to Close Modal by Clicking Outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll(".modal");
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        }
+
+        // Function to Show Error
+        function showError(element, message) {
+            element.textContent = message;
+            element.style.display = "block";
+        }
+
+        // Function to Show Success
+        function showSuccess(element, message) {
+            element.textContent = message;
+            element.style.display = "block";
+        }
+
+        // Function to Clear Messages
+        function clearMessages() {
+            document.getElementById("loginError").style.display = "none";
+            document.getElementById("loginSuccess").style.display = "none";
+            document.getElementById("registerError").style.display = "none";
+            document.getElementById("registerSuccess").style.display = "none";
+            document.getElementById("forgotError").style.display = "none";
+            document.getElementById("forgotSuccess").style.display = "none";
+        }
+
+        // Function to Add Student to Class
+        function addStudentToClass(form, stream) {
+            const name = document.getElementById("newStudentName").value.trim();
+            
+            if (!name) {
+                alert("Please enter student name");
+                return;
+            }
+            
+            // Add student
+            const newStudent = {
+                id: schoolData.students.length + 1,
+                name,
+                form,
+                stream,
+                parent: "",
+                parentName: "",
+                contactInfo: ""
+            };
+            
+            schoolData.students.push(newStudent);
+            
+            // Refresh the student list
+            manageClassStudents(form, stream);
+            showNotification("Student added successfully");
+        }
+
+        // Function to Remove Student from Class
+        function removeStudentFromClass(studentId) {
+            if (confirm("Are you sure you want to remove this student?")) {
+                const studentIndex = schoolData.students.findIndex(s => s.id === studentId);
+                if (studentIndex !== -1) {
+                    schoolData.students.splice(studentIndex, 1);
+                    // Refresh the student list
+                    const modal = document.querySelector(".modal");
+                    if (modal) {
+                        const title = modal.querySelector("h2").textContent;
+                        const match = title.match(/Manage (Form \d)([A-H]) Students/);
+                        if (match) {
+                            const form = match[1];
+                            const stream = match[2];
+                            manageClassStudents(form, stream);
+                        }
+                    }
+                }
+                showNotification("Student removed successfully");
+            }
+        }
+
+        // Function to Show Class Student List
+        function manageClassStudents(form, stream) {
+            const className = form + stream;
+            const classStudents = schoolData.students.filter(s => s.form === form && s.stream === stream);
+            
+            let html = `
+                <div class="modal-header">
+                    <h2>Manage Students: ${className}</h2>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                
+                <div class="form-group">
+                    <label>Add New Student:</label>
+                    <input type="text" id="newStudentName" class="form-control" placeholder="Student name">
+                </div>
+                
+                <button class="btn" onclick="addStudentToClass('${form}', '${stream}')">Add Student</button>
+                
+                <h4 style="margin-top: 20px;">Current Students</h4>
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Parent Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="classStudentsTable">
+            `;
+            
+            classStudents.forEach(student => {
+                html += `
+                    <tr>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.parentName || 'Not assigned'}</td>
+                        <td>
+                            <button class="btn btn-danger" onclick="removeStudentFromClass(${student.id})">Remove</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `</tbody></table>`;
+            
+            // Create or update modal
+            const existingModal = document.getElementById("manageClassStudentsModal");
+            if (existingModal) {
+                existingModal.querySelector(".modal-content").innerHTML = html;
+            } else {
+                const modal = document.createElement("div");
+                modal.id = "manageClassStudentsModal";
+                modal.className = "modal";
+                modal.innerHTML = `<div class="modal-content">${html}</div>`;
+                document.body.appendChild(modal);
+            }
+            
+            // Show the modal
+            document.getElementById("manageClassStudentsModal").style.display = "block";
+        }
+
+        // Function to Assign Teacher to Class
+        function assignTeacherToClass() {
+            const teacherId = parseInt(document.getElementById("teacherSelect").value);
+            const className = document.getElementById("classSelect").value;
+            const subject = document.getElementById("subjectSelect").value;
+            
+            // Find teacher
+            const teacher = schoolData.users.find(u => u.id === teacherId);
+            if (!teacher) return;
+            
+            // Initialize classes array if it doesn't exist
+            if (!teacher.classes) {
+                teacher.classes = [];
+            }
+            
+            // Initialize subjects array if it doesn't exist
+            if (!teacher.subjects) {
+                teacher.subjects = [];
+            }
+            
+            // Add class if not already assigned
+            if (!teacher.classes.includes(className)) {
+                teacher.classes.push(className);
+            }
+            
+            // Add subject if not already assigned
+            if (!teacher.subjects.includes(subject)) {
+                teacher.subjects.push(subject);
+            }
+            
+            showCurrentAssignments();
+            showNotification("Teacher assigned successfully");
+        }
+
+        // Function to Show Current Teacher Assignments
+        function showCurrentAssignments() {
+            let html = '<h4>Current Teacher Assignments</h4><ul style="list-style-type: none; padding: 0;">';
+            
+            schoolData.users
+                .filter(u => u.role === "teacher" && u.classes && u.classes.length > 0)
+                .forEach(teacher => {
+                    html += `<li style="margin-bottom: 10px;"><strong>${teacher.name}</strong> teaches ${teacher.subjects ? teacher.subjects.join(', ') : 'no subjects'} in classes: ${teacher.classes.join(', ')}</li>`;
+                });
+            
+            html += '</ul>';
+            document.getElementById("currentAssignments").innerHTML = html;
+        }
+
+        // Function to Submit Student Results
+        function submitResults() {
+            const className = document.getElementById("resultsClassSelect").value;
+            const term = document.getElementById("termSelect").value;
+            const subject = document.getElementById("subjectSelect").value;
+            
+            // In a real system, you would save the results to the database
+            showNotification("Results submitted successfully");
+            closeModal();
+        }
+
+        // Function to Update Student List
+        function updateStudentList() {
+            const className = document.getElementById("viewClassSelect").value;
+            const form = className.substring(0, 6);
+            const stream = className.substring(6);
+            const classStudents = schoolData.students.filter(s => s.form === form && s.stream === stream);
+            
+            let html = `
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Parent Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            classStudents.forEach(student => {
+                html += `
+                    <tr>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.parentName || 'Not assigned'}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `</tbody></table>`;
+            document.getElementById("studentListTable").innerHTML = html;
+        }
+
+        // Function to Update Child Performance
+        function updateChildPerformance() {
+            const childName = document.getElementById("childSelect").value;
+            const term = document.getElementById("performanceTermSelect").value;
+            
+            // In a real system, you would fetch performance data from the database
+            document.getElementById("performanceResults").innerHTML = `
+                <h4>Performance for ${childName}, ${term}</h4>
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Score</th>
+                            <th>Grade</th>
+                            <th>Position</th>
+                            <th>Teacher Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${schoolData.subjects.map(subject => `
+                            <tr>
+                                <td>${subject}</td>
+                                <td>${Math.floor(Math.random() * 30) + 70}</td>
+                                <td>${['A', 'B', 'C'][Math.floor(Math.random() * 3)]}</td>
+                                <td>${Math.floor(Math.random() * 40) + 1}/45</td>
+                                <td>Good performance</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                <div style="margin-top: 20px;">
+                    <h5>Performance Summary</h5>
+                    <p><strong>Total Score:</strong> ${Math.floor(Math.random() * 200) + 300}/400</p>
+                    <p><strong>Average:</strong> ${Math.floor(Math.random() * 20) + 75}%</p>
+                    <p><strong>Class Position:</strong> ${Math.floor(Math.random() * 10) + 1}/45</p>
+                    <p><strong>Form Position:</strong> ${Math.floor(Math.random() * 50) + 1}/180</p>
+                </div>
+            `;
+        }
+
+        // Function to Update Report Cards
+        function updateReportCards() {
+            const childName = document.getElementById("reportChildSelect").value;
+            const term = document.getElementById("reportTermSelect").value;
+            
+            // In a real system, you would generate a report card from the database
+            document.getElementById("reportCardView").innerHTML = `
+                <div style="border: 1px solid #ddd; padding: 20px; border-radius: 5px;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h4>DUMILA SECONDARY SCHOOL</h4>
+                        <h5>PROGRESS REPORT - ${term.toUpperCase()}</h5>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                        <div>
+                            <p><strong>Student Name:</strong> ${childName}</p>
+                            <p><strong>Form:</strong> 2</p>
+                            <p><strong>Stream:</strong> B</p>
+                        </div>
+                        <div>
+                            <p><strong>Year:</strong> 2025</p>
+                            <p><strong>Term:</strong> ${term}</p>
+                        </div>
+                    </div>
+                    <table class="user-table" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Score</th>
+                                <th>Grade</th>
+                                <th>Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${schoolData.subjects.map(subject => `
+                                <tr>
+                                    <td>${subject}</td>
+                                    <td>${Math.floor(Math.random() * 30) + 70}</td>
+                                    <td>${['A', 'B', 'C'][Math.floor(Math.random() * 3)]}</td>
+                                    <td>Good performance</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 20px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <div>
+                                <p><strong>Total Score:</strong> ${Math.floor(Math.random() * 200) + 300}/400</p>
+                                <p><strong>Average:</strong> ${Math.floor(Math.random() * 20) + 75}%</p>
+                            </div>
+                            <div>
+                                <p><strong>Class Position:</strong> ${Math.floor(Math.random() * 10) + 1}/45</p>
+                                <p><strong>Form Position:</strong> ${Math.floor(Math.random() * 50) + 1}/180</p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <p><strong>Class Teacher Comments:</strong></p>
+                            <p>${childName} has shown excellent performance this term. Keep up the good work!</p>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <p><strong>Headmaster Comments:</strong></p>
+                            <p>Congratulations on your excellent performance. Continue with the same enthusiasm.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to Download Report
+        function downloadReportCard() {
+            showNotification("Report downloaded successfully");
+        }
+
+        // Function to Show Student List for Results Entry
+        function populateResultsEntryTable() {
+            const className = document.getElementById("resultsClassSelect").value;
+            const form = className.substring(0, 6);
+            const stream = className.substring(6);
+            const classStudents = schoolData.students.filter(s => s.form === form && s.stream === stream);
+            
+            let html = `
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Score (0-100)</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            classStudents.forEach(student => {
+                html += `
+                    <tr>
+                        <td>${student.name}</td>
+                        <td><input type="number" min="0" max="100" class="form-control"></td>
+                        <td>
+                            <select class="form-control">
+                                <option>A</option>
+                                <option>B+</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                                <option>E</option>
+                                <option>F</option>
+                            </select>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `</tbody></table>
+                <p>Enter scores for ${className}</p>
+            `;
+            
+            document.getElementById("resultsEntryTable").innerHTML = html;
+        }
+
+        // Function to Toggle Upload Method (Manual/Excel)
+        function toggleUploadMethod() {
+            const method = document.getElementById("uploadMethod").value;
+            document.getElementById("manualResultsEntry").style.display = method === "manual" ? "block" : "none";
+            document.getElementById("excelResultsUpload").style.display = method === "excel" ? "block" : "none";
+        }
+
+        // Function to Toggle Registration Method (Single/Bulk)
+        function toggleRegistrationMethod() {
+            const method = document.getElementById("registrationMethod").value;
+            document.getElementById("singleStudentForm").style.display = method === "single" ? "block" : "none";
+            document.getElementById("bulkUploadForm").style.display = method === "bulk" ? "block" : "none";
+        }
+
+        // Function to Update Student Streams
+        function updateStudentStreams() {
+            const form = document.getElementById("studentFormSelect").value;
+            const streamSelect = document.getElementById("studentStreamSelect");
+            
+            streamSelect.innerHTML = "";
+            schoolData.classes[form].forEach(stream => {
+                streamSelect.innerHTML += `<option value="${stream}">${stream}</option>`;
+            });
+        }
+
+        // Function to Register Single Student - Modified per requirements
+        function registerSingleStudent() {
+            const form = document.getElementById("studentFormSelect").value;
+            const stream = document.getElementById("studentStreamSelect").value;
+            const name = document.getElementById("studentName").value.trim();
+            const parentName = document.getElementById("parentName").value.trim();
+            const contactInfo = document.getElementById("contactInfo").value.trim();
+            
+            if (!name) {
+                alert("Please enter student name");
+                return;
+            }
+            
+            // Add student
+            const newStudent = {
+                id: schoolData.students.length + 1,
+                name,
+                form,
+                stream,
+                parent: "",
+                parentName,
+                contactInfo
+            };
+            
+            schoolData.students.push(newStudent);
+            
+            // Clear form
+            document.getElementById("studentName").value = "";
+            document.getElementById("parentName").value = "";
+            document.getElementById("contactInfo").value = "";
+            
+            // Update students table
+            populateStudentsTable();
+            
+            showNotification("Student registered successfully");
+        }
+
+        // Function to Populate Students Table - Modified per requirements
+        function populateStudentsTable() {
+            const tbody = document.getElementById("studentsTableBody");
+            tbody.innerHTML = "";
+            
+            schoolData.students.forEach(student => {
+                const row = document.createElement("tr");
+                
+                row.innerHTML = `
+                    <td>${student.id}</td>
+                    <td>${student.name}</td>
+                    <td>${student.form}${student.stream}</td>
+                    <td>${student.parentName || 'Not assigned'}</td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        // Function to Setup File Uploads
+        function setupFileUploads() {
+            // Student Excel Upload
+            document.getElementById("studentExcelFile").addEventListener("change", function(e) {
+                const fileName = e.target.files[0] ? e.target.files[0].name : "No file chosen";
+                document.getElementById("excelFileName").textContent = fileName;
+            });
+            
+            // Results Excel Upload
+            document.getElementById("resultsExcelFile").addEventListener("change", function(e) {
+                const fileName = e.target.files[0] ? e.target.files[0].name : "No file chosen";
+                document.getElementById("resultsFileName").textContent = fileName;
+            });
+        }
+
+        // Function to Upload Student Excel - Modified per requirements
+        function uploadStudentExcel() {
+            const fileInput = document.getElementById("studentExcelFile");
+            if (!fileInput.files.length) {
+                alert("Please select a file first");
+                return;
+            }
+            
+            // In a real system, you would parse the Excel file and add students
+            // For demo, we'll simulate adding 5 students
+            for (let i = 0; i < 5; i++) {
+                const newStudent = {
+                    id: schoolData.students.length + 1,
+                    name: `Student ${schoolData.students.length + 1}`,
+                    form: document.getElementById("studentFormSelect").value,
+                    stream: document.getElementById("studentStreamSelect").value,
+                    parent: "",
+                    parentName: `Parent ${schoolData.students.length + 1}`,
+                    contactInfo: "0756000000"
+                };
+                
+                schoolData.students.push(newStudent);
+            }
+            
+            // Update table
+            populateStudentsTable();
+            
+            // Clear file input
+            fileInput.value = "";
+            document.getElementById("excelFileName").textContent = "No file chosen";
+            
+            showNotification("Students uploaded successfully");
+        }
+
+        // Function to Load System Settings
+        function loadSystemSettings() {
+            document.getElementById("securityLevel").value = schoolData.systemSettings.securityLevel;
+            document.getElementById("passwordPolicy").value = schoolData.systemSettings.passwordPolicy;
+            document.getElementById("sessionTimeout").value = schoolData.systemSettings.sessionTimeout;
+            document.getElementById("enable2FA").checked = schoolData.systemSettings.enable2FA;
+        }
+
+        // Function to Save System Settings
+        function saveSystemSettings() {
+            schoolData.systemSettings.securityLevel = document.getElementById("securityLevel").value;
+            schoolData.systemSettings.passwordPolicy = document.getElementById("passwordPolicy").value;
+            schoolData.systemSettings.sessionTimeout = parseInt(document.getElementById("sessionTimeout").value);
+            schoolData.systemSettings.enable2FA = document.getElementById("enable2FA").checked;
+            
+            showNotification("System settings saved successfully");
+            closeModal();
+        }
+
+        // Function to Search Student Results
+        function searchStudentResults() {
+            const searchTerm = document.getElementById("studentSearchInput").value.trim();
+            
+            if (!searchTerm) {
+                alert("Please enter a student name");
+                return;
+            }
+            
+            // Find student
+            const student = schoolData.students.find(s => 
+                s.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            
+            const resultsDiv = document.getElementById("studentSearchResults");
+            
+            if (student) {
+                // Find parent
+                const parent = schoolData.users.find(u => u.username === student.parent);
+                
+                // Display results
+                resultsDiv.innerHTML = `
+                    <div style="background: white; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <h4>Student Information</h4>
+                        <p><strong>Name:</strong> ${student.name}</p>
+                        <p><strong>Class:</strong> ${student.form}${student.stream}</p>
+                        <p><strong>Parent:</strong> ${student.parentName || 'Not found'}</p>
+                        
+                        <div style="margin-top: 20px;">
+                            <button class="btn" onclick="viewStudentResults('${student.name}')">View Results</button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                resultsDiv.innerHTML = `
+                    <div style="background: #fdecea; padding: 20px; border-radius: 5px; color: #c62828;">
+                        No student found with that name
+                    </div>
+                `;
+            }
+        }
+
+        // Function to View Student Results
+        function viewStudentResults(studentName) {
+            // In a real system, you would fetch the student's results
+            // For demo, we'll show a sample result
+            const resultsDiv = document.getElementById("studentSearchResults");
+            
+            resultsDiv.innerHTML += `
+                <div style="background: white; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-top: 20px;">
+                    <h4>Results for ${studentName} - Term 1</h4>
+                    <table class="user-table" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Score</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${schoolData.subjects.slice(0, 5).map(subject => `
+                                <tr>
+                                    <td>${subject}</td>
+                                    <td>${Math.floor(Math.random() * 30) + 70}</td>
+                                    <td>${['A', 'B', 'C'][Math.floor(Math.random() * 3)]}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 20px;">
+                        <button class="btn" onclick="downloadStudentReport('${studentName}')">Download Report</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to Download Student Report
+        function downloadStudentReport(studentName) {
+            showNotification("Report downloaded successfully");
+        }
+        
+        // Function to populate children list for parent dashboard
+        function populateChildrenList() {
+            if (!schoolData.currentUser || schoolData.currentUser.role !== 'parent') return;
+            
+            const container = document.getElementById("childrenList");
+            container.innerHTML = "";
+            
+            if (schoolData.currentUser.children && schoolData.currentUser.children.length > 0) {
+                schoolData.currentUser.children.forEach(child => {
+                    const student = schoolData.students.find(s => s.name === child);
+                    if (student) {
+                        const card = document.createElement("div");
+                        card.className = "card";
+                        card.innerHTML = `
+                            <h3>${child}</h3>
+                            <p><strong>Class:</strong> ${student.form}${student.stream}</p>
+                            <button class="btn" onclick="viewChildDetails('${child}')">View Details</button>
+                        `;
+                        container.appendChild(card);
+                    }
+                });
+            } else {
+                container.innerHTML = `<p>No children registered under your account.</p>`;
+            }
+        }
+        
+        // Function to view child details
+        function viewChildDetails(childName) {
+            const student = schoolData.students.find(s => s.name === childName);
+            if (!student) return;
+            
+            document.getElementById("childSelect").value = childName;
+            document.getElementById("reportChildSelect").value = childName;
+            showModal("childPerformanceModal");
+        }
+
+        // Set Event Listeners
+        document.getElementById("loginBtn").addEventListener("click", login);
+        document.getElementById("registerBtn").addEventListener("click", register);
+        document.getElementById("resetPasswordBtn").addEventListener("click", handlePasswordReset);
+        document.getElementById("logoutBtn").addEventListener("click", logout);
+        document.getElementById("teacherLogoutBtn").addEventListener("click", logout);
+        document.getElementById("parentLogoutBtn").addEventListener("click", logout);
+    </script>
+</body>
+</html>
